@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Excluir Dados — Gap Kart</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    :root {
+      --bg:      #0e0720;
+      --surface: #180e30;
+      --card:    #211545;
+      --accent:  #00e5ff;
+      --accent2: #f07c28;
+      --text:    #e8e0f8;
+      --muted:   #a48cc8;
+      --border:  #3a2468;
+      --radius:  14px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    header {
+      background: linear-gradient(135deg, #0e0720 0%, #2a1060 50%, #1a0840 100%);
+      border-bottom: 2px solid var(--accent);
+      padding: 40px 24px 36px;
+      text-align: center;
+    }
+
+    .logo-icon {
+      width: 72px; height: 72px;
+      border-radius: 18px;
+      overflow: hidden;
+      margin: 0 auto 16px;
+      box-shadow: 0 0 28px rgba(0,229,255,0.35), 0 0 56px rgba(140,60,255,0.2);
+    }
+
+    .logo-icon img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    header h1 { font-size: 2rem; font-weight: 800; color: #fff; }
+    header h1 span { color: var(--accent); }
+    header p { color: var(--muted); margin-top: 6px; font-size: 0.95rem; }
+
+    main {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 36px 20px 80px;
+    }
+
+    .alert-red {
+      background: rgba(239,68,68,0.1);
+      border: 1px solid rgba(239,68,68,0.3);
+      border-left: 4px solid #ef4444;
+      border-radius: var(--radius);
+      padding: 18px 22px;
+      margin-bottom: 28px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      color: #fca5a5;
+      font-size: 0.93rem;
+    }
+
+    .alert-red i { font-size: 1.3rem; flex-shrink: 0; margin-top: 2px; }
+    .alert-red strong { color: #fecaca; }
+
+    section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 18px;
+      overflow: hidden;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 20px;
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-icon {
+      width: 36px; height: 36px;
+      border-radius: 9px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .section-header h2 { font-size: 1rem; font-weight: 700; color: #fff; }
+
+    .section-body { padding: 20px; }
+    .section-body p { font-size: 0.9rem; color: var(--muted); margin-bottom: 10px; }
+    .section-body strong { color: var(--text); }
+
+    /* Steps */
+    .steps { list-style: none; margin-top: 8px; }
+    .steps li {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      margin-bottom: 14px;
+    }
+
+    .step-num {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #0e0720;
+      font-weight: 800;
+      font-size: 0.85rem;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .step-text { font-size: 0.9rem; color: var(--muted); }
+    .step-text strong { color: var(--text); }
+
+    /* Data table */
+    .data-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+    .data-table th {
+      text-align: left;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--muted);
+      padding: 8px 12px;
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+    .data-table td {
+      font-size: 0.85rem;
+      color: var(--muted);
+      padding: 10px 12px;
+      border-bottom: 1px solid rgba(58,36,104,0.5);
+      vertical-align: top;
+    }
+    .data-table td strong { color: var(--text); }
+    .data-table tr:last-child td { border-bottom: none; }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 2px 10px;
+      border-radius: 50px;
+    }
+
+    .pill-red   { background: rgba(239,68,68,0.15); color: #fca5a5; }
+    .pill-green { background: rgba(34,197,94,0.15);  color: #86efac; }
+    .pill-muted { background: rgba(100,80,200,0.15); color: #b0a0ff; }
+
+    /* Email button */
+    .email-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, rgba(0,229,255,0.15), rgba(0,229,255,0.05));
+      border: 1px solid rgba(0,229,255,0.3);
+      color: var(--accent);
+      text-decoration: none;
+      padding: 14px 22px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      margin-top: 14px;
+      transition: background 0.2s;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .email-btn:hover {
+      background: linear-gradient(135deg, rgba(0,229,255,0.25), rgba(0,229,255,0.1));
+    }
+
+    .note {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 24px 20px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    footer a { color: var(--accent); text-decoration: none; }
+    footer strong { color: var(--accent); }
+
+    .item-row {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+    }
+
+    .item-row p { font-size: 0.88rem; color: var(--muted); margin: 0; }
+    .item-row strong { color: var(--text); }
+
+    .item-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 50px;
+      margin-bottom: 2px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo-icon">
+    <img src="https://raw.githubusercontent.com/hofernandes/gapkart-web/main/Imagens/icone2.jpg" alt="Gap Kart" />
+  </div>
+  <h1>Gap <span>Kart</span></h1>
+  <p>Solicitação de Exclusão de Dados</p>
+</header>
+
+<main>
+
+  <div class="alert-red">
+    <i class="fa-solid fa-triangle-exclamation"></i>
+    <div>
+      <strong>Atenção:</strong> A exclusão de dados é <strong>permanente e irreversível</strong>.
+      Sua posição no ranking não poderá ser recuperada após a remoção.
+    </div>
+  </div>
+
+  <!-- BLOCO 1: O QUE CHEGA AO DESENVOLVEDOR -->
+  <section>
+    <div class="section-header">
+      <div class="section-icon" style="background:rgba(0,229,255,0.12); color:var(--accent)">
+        <i class="fa-solid fa-envelope"></i>
+      </div>
+      <h2>O que chega ao desenvolvedor — Ranking global</h2>
+    </div>
+    <div class="section-body">
+      <p>
+        O único dado que o desenvolvedor pode remover é a sua <strong>pontuação no ranking global</strong>,
+        armazenada nos servidores do Google Play Games. Para solicitar a remoção:
+      </p>
+      <ol class="steps">
+        <li>
+          <div class="step-num">1</div>
+          <div class="step-text">
+            Envie um e-mail para <strong>higorofernandes@gmail.com</strong> com o assunto:<br>
+            <strong>"[Gap Kart] Excluir minha pontuação do ranking"</strong>
+          </div>
+        </li>
+        <li>
+          <div class="step-num">2</div>
+          <div class="step-text">
+            Informe seu <strong>nome de exibição no Google Play Games</strong>
+            (o nome que aparece no ranking dentro do jogo).
+          </div>
+        </li>
+        <li>
+          <div class="step-num">3</div>
+          <div class="step-text">
+            Em até <strong>15 dias úteis</strong> a pontuação será removida do placar e você
+            receberá uma confirmação por e-mail.
+          </div>
+        </li>
+      </ol>
+
+      <a class="email-btn"
+         href="mailto:higorofernandes@gmail.com?subject=%5BGap%20Kart%5D%20Excluir%20minha%20pontua%C3%A7%C3%A3o%20do%20ranking">
+        <i class="fa-solid fa-envelope-open-text"></i>
+        Enviar e-mail de solicitação
+      </a>
+      <p class="note"><i class="fa-solid fa-clock"></i> Prazo de resposta: até 15 dias úteis</p>
+    </div>
+  </section>
+
+  <!-- BLOCO 2: O QUE O USUÁRIO FAZ SOZINHO -->
+  <section>
+    <div class="section-header">
+      <div class="section-icon" style="background:rgba(34,197,94,0.12); color:#86efac">
+        <i class="fa-solid fa-mobile-screen"></i>
+      </div>
+      <h2>O que você mesmo pode excluir agora</h2>
+    </div>
+    <div class="section-body">
+      <p>
+        Recorde, fantasma e configurações ficam <strong>apenas no seu dispositivo</strong> —
+        o desenvolvedor não tem acesso a eles. Você pode excluí-los a qualquer momento:
+      </p>
+
+      <div style="margin-top:14px; display:flex; flex-direction:column; gap:12px;">
+        <div class="item-row">
+          <div class="item-badge" style="background:rgba(239,68,68,0.12); color:#fca5a5">
+            <i class="fa-solid fa-trash"></i> Excluição imediata
+          </div>
+          <p style="margin:8px 0 4px"><strong>Opção 1 — Desinstalar o app</strong></p>
+          <p style="margin:0">Remove todos os dados locais automaticamente.</p>
+        </div>
+        <div class="item-row">
+          <div class="item-badge" style="background:rgba(239,68,68,0.12); color:#fca5a5">
+            <i class="fa-solid fa-trash"></i> Excluição imediata
+          </div>
+          <p style="margin:8px 0 4px"><strong>Opção 2 — Limpar dados do app</strong></p>
+          <p style="margin:0">
+            <strong>Configurações do Android</strong> → Apps → Gap Kart →
+            Armazenamento → <strong>Limpar dados</strong>
+          </p>
+        </div>
+      </div>
+
+      <table class="data-table" style="margin-top:18px">
+        <thead>
+          <tr>
+            <th>Dado local</th>
+            <th>Quem pode excluir</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Recorde (melhor pontuação)</strong></td>
+            <td><span class="pill pill-green"><i class="fa-solid fa-user"></i> Você mesmo</span></td>
+          </tr>
+          <tr>
+            <td><strong>Gravação do fantasma</strong></td>
+            <td><span class="pill pill-green"><i class="fa-solid fa-user"></i> Você mesmo</span></td>
+          </tr>
+          <tr>
+            <td><strong>Configurações do jogo</strong></td>
+            <td><span class="pill pill-green"><i class="fa-solid fa-user"></i> Você mesmo</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- BLOCO 3: O QUE O GOOGLE CONTROLA -->
+  <section>
+    <div class="section-header">
+      <div class="section-icon" style="background:rgba(66,133,244,0.12); color:#93c5fd">
+        <i class="fa-brands fa-google"></i>
+      </div>
+      <h2>O que é controlado pelo Google</h2>
+    </div>
+    <div class="section-body">
+      <p>
+        Dados coletados pelo <strong>AdMob</strong> e pelo <strong>Google Play</strong> estão fora
+        do acesso do desenvolvedor. Para gerenciá-los, use as ferramentas de privacidade do Google:
+      </p>
+
+      <table class="data-table" style="margin-top:12px">
+        <thead>
+          <tr>
+            <th>Dado</th>
+            <th>Como excluir</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>ID de publicidade (AdMob)</strong></td>
+            <td>
+              Android → Configurações → Google → Anúncios →
+              <strong>Redefinir ID</strong> ou <strong>Cancelar personalização</strong>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Atividade no Google Play Games</strong></td>
+            <td>
+              <a href="https://myaccount.google.com/privacy" target="_blank" style="color:var(--accent)">myaccount.google.com</a>
+              → Dados e privacidade → Google Play Games
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Dados de diagnóstico / erros</strong></td>
+            <td>Gerenciados automaticamente pelo Google Play — sem ação necessária</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>© 2026 <strong>Gap Kart</strong> · Higor Fernandes</p>
+  <p style="margin-top:6px">
+    <a href="privacy_policy.html">Política de Privacidade</a>
+    &nbsp;·&nbsp;
+    <a href="mailto:higorofernandes@gmail.com">higorofernandes@gmail.com</a>
+  </p>
+</footer>
+
+</body>
+</html>
