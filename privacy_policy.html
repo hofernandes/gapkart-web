@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Política de Privacidade — Gap Kart</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    :root {
+      --bg:        #0f172a;
+      --surface:   #1e293b;
+      --card:      #243049;
+      --accent:    #00e5ff;
+      --accent2:   #f5c518;
+      --text:      #e2e8f0;
+      --muted:     #94a3b8;
+      --border:    #334155;
+      --danger:    #ef4444;
+      --radius:    14px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: linear-gradient(135deg, #0f172a 0%, #1a2744 60%, #0e3460 100%);
+      border-bottom: 2px solid var(--accent);
+      padding: 48px 24px 40px;
+      text-align: center;
+    }
+
+    .logo-wrap {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .logo-icon {
+      width: 58px; height: 58px;
+      background: var(--accent);
+      border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 28px;
+      color: var(--bg);
+      box-shadow: 0 0 24px rgba(0, 229, 255, 0.45);
+    }
+
+    header h1 {
+      font-size: clamp(1.8rem, 5vw, 2.8rem);
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.5px;
+    }
+
+    header h1 span { color: var(--accent); }
+
+    .header-subtitle {
+      font-size: 1rem;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 22px;
+    }
+
+    .badge {
+      background: rgba(0,229,255,0.1);
+      border: 1px solid rgba(0,229,255,0.3);
+      color: var(--accent);
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 5px 14px;
+      border-radius: 50px;
+      display: flex; align-items: center; gap: 6px;
+    }
+
+    /* ── LAYOUT ── */
+    main {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 40px 20px 80px;
+    }
+
+    /* ── INTRO CARD ── */
+    .intro-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      border-radius: var(--radius);
+      padding: 24px 28px;
+      margin-bottom: 36px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .intro-card .icon { font-size: 1.6rem; color: var(--accent); flex-shrink: 0; margin-top: 2px; }
+
+    .intro-card p { font-size: 0.97rem; color: var(--muted); }
+    .intro-card strong { color: var(--text); }
+
+    /* ── SECTION ── */
+    section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 20px 24px;
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-icon {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .section-header h2 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .section-body {
+      padding: 22px 24px;
+    }
+
+    .section-body p, .section-body li {
+      font-size: 0.93rem;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .section-body strong { color: var(--text); }
+
+    .section-body ul, .section-body ol {
+      padding-left: 20px;
+      margin: 10px 0;
+    }
+
+    .section-body li { margin-bottom: 6px; }
+
+    /* ── ITEM GRID ── */
+    .item-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .item-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .item-box .ib-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+    .item-box .ib-title { font-size: 0.85rem; font-weight: 700; color: var(--text); }
+    .item-box .ib-desc  { font-size: 0.8rem;  color: var(--muted); margin-top: 2px; }
+
+    /* ── THIRD PARTY TABLE ── */
+    .tp-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px 18px;
+      margin-bottom: 12px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .tp-logo {
+      width: 40px; height: 40px;
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    .tp-name  { font-size: 0.92rem; font-weight: 700; color: var(--text); }
+    .tp-type  { font-size: 0.78rem; color: var(--muted); margin-top: 1px; }
+    .tp-desc  { font-size: 0.82rem; color: var(--muted); margin-top: 6px; }
+    .tp-link  { font-size: 0.78rem; margin-top: 6px; }
+    .tp-link a { color: var(--accent); text-decoration: none; }
+    .tp-link a:hover { text-decoration: underline; }
+
+    /* ── RIGHTS GRID ── */
+    .rights-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .right-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+      text-align: center;
+    }
+
+    .right-box .r-icon { font-size: 1.5rem; margin-bottom: 8px; }
+    .right-box .r-title { font-size: 0.85rem; font-weight: 700; color: var(--text); }
+    .right-box .r-desc  { font-size: 0.78rem; color: var(--muted); margin-top: 4px; }
+
+    /* ── NO DATA PILL ── */
+    .no-data-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .no-data-pill {
+      background: rgba(239,68,68,0.12);
+      border: 1px solid rgba(239,68,68,0.3);
+      color: #fca5a5;
+      font-size: 0.8rem;
+      padding: 5px 14px;
+      border-radius: 50px;
+      display: flex; align-items: center; gap: 7px;
+    }
+
+    /* ── ALERT BOX ── */
+    .alert {
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin-top: 14px;
+      display: flex;
+      gap: 12px;
+      font-size: 0.88rem;
+    }
+
+    .alert-yellow {
+      background: rgba(245,197,24,0.1);
+      border: 1px solid rgba(245,197,24,0.3);
+      color: #fde68a;
+    }
+
+    .alert-green {
+      background: rgba(34,197,94,0.1);
+      border: 1px solid rgba(34,197,94,0.3);
+      color: #86efac;
+    }
+
+    .alert i { flex-shrink: 0; margin-top: 2px; }
+
+    /* ── CONTACT ── */
+    .contact-box {
+      background: linear-gradient(135deg, rgba(0,229,255,0.08) 0%, rgba(0,229,255,0.02) 100%);
+      border: 1px solid rgba(0,229,255,0.25);
+      border-radius: 12px;
+      padding: 22px;
+      text-align: center;
+      margin-top: 14px;
+    }
+
+    .contact-box .c-icon { font-size: 2rem; color: var(--accent); margin-bottom: 10px; }
+    .contact-box p { font-size: 0.9rem; color: var(--muted); }
+    .contact-box a { color: var(--accent); text-decoration: none; font-weight: 600; }
+    .contact-box a:hover { text-decoration: underline; }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    footer strong { color: var(--accent); }
+
+    /* ── COLORS PER SECTION ── */
+    .c-blue   { background: rgba(59,130,246,0.15); color: #93c5fd; }
+    .c-cyan   { background: rgba(0,229,255,0.12);  color: var(--accent); }
+    .c-yellow { background: rgba(245,197,24,0.15); color: var(--accent2); }
+    .c-green  { background: rgba(34,197,94,0.15);  color: #86efac; }
+    .c-purple { background: rgba(168,85,247,0.15); color: #c4b5fd; }
+    .c-orange { background: rgba(249,115,22,0.15); color: #fdba74; }
+    .c-red    { background: rgba(239,68,68,0.15);  color: #fca5a5; }
+
+    @media (max-width: 560px) {
+      .item-grid { grid-template-columns: 1fr; }
+      .rights-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── HEADER ─────────────────────────────────────────────── -->
+<header>
+  <div class="logo-wrap">
+    <div class="logo-icon"><i class="fa-solid fa-car-side"></i></div>
+  </div>
+  <h1>Gap <span>Kart</span></h1>
+  <p class="header-subtitle">Política de Privacidade</p>
+  <div class="badge-row">
+    <span class="badge"><i class="fa-solid fa-calendar-check"></i> Última atualização: Junho de 2026</span>
+    <span class="badge"><i class="fa-solid fa-shield-halved"></i> LGPD / GDPR Compatível</span>
+    <span class="badge"><i class="fa-brands fa-android"></i> Android</span>
+  </div>
+</header>
+
+<main>
+
+  <!-- ── INTRO ── -->
+  <div class="intro-card">
+    <div class="icon"><i class="fa-solid fa-circle-info"></i></div>
+    <div>
+      <p>
+        <strong>Gap Kart</strong> é um jogo de desvio de barreiras desenvolvido por
+        <strong>Higor Fernandes</strong>. Esta Política de Privacidade explica, de forma
+        clara e transparente, quais dados são coletados, como são utilizados e quais são
+        seus direitos. Ao utilizar o aplicativo, você concorda com as práticas descritas
+        aqui.
+      </p>
+    </div>
+  </div>
+
+  <!-- ── 1. QUEM SOMOS ── -->
+  <section>
+    <div class="section-header">
+      <div class="section-icon c-cyan"><i class="fa-solid fa-user-tie"></i></div>
+      <h2>1. Desenvolvedor Responsável</h2>
+    </div>
+    <div class="section-body">
+      <div class="item-grid">
+        <div class="item-box">
+          <div class="ib-icon" style="color:#00e5ff"><i class="fa-solid fa-person"></i></div>
+          <div>
+            <div class="ib-title">Desenvolvedor</div>
+            <div class="ib-desc">Higor Fernandes</div>
+          </div>
+        </div>
+        <div class="item-box">
+          <div class="ib-icon" style="color:#00e5ff"><i class="fa-solid fa-mobile-screen"></i></div>
+          <div>
+            <div class="ib-title">Aplicativo</div>
+            <div class="ib-desc">Gap Kart — versão Android</div>
+          </div>
+        </div>
+        <div class="item-box">
+          <div class="ib-icon" style="color:#00e5ff"><i class="fa-solid fa-envelope"></i></div>
+          <div>
+            <div class="ib-title">Contato</div>
+            <div class="ib-desc">higorofernandes@gmail.com</div>
+          </div>
+        </div>
+        <div class="item-box">
+          <div class="ib-icon" style="color:#00e5ff"><i class="fa-brands fa-google-play"></i></div>
+          <div>
+            <div class="ib-title">Distribuição</div>
+            <div class="ib-desc">Google Play Store</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 2. DADOS COLETADOS ── -->
+  <section>
+    <div class="section-header">
+      <div class="section-icon c-blue"><i class="fa-solid fa-database"></i></div>
+      <h2>2. Dados Coletados</h2>
+    </div>
+    <div class="section-body">
+      <p>O Gap Kart coleta a quantidade mínima de dados necessária para funcionar. Veja o detalhamento abaixo:</p>
+
+      <div class="item-grid" style="margin-top:16px">
+        <div class="item-box">
+          <div class="ib-icon" style="color:#f5c518"><i class="fa-solid fa-trophy"></i></div>
+          <div>
+            <div class="ib-title">Pontuação máxima</div>
+            <div class="ib-desc">Armazenada localmente no dispositivo. Nunca enviada a servidores próprios.</div>
+          </div>
+        </div>
+        <div class="item-box">
+          <div class="ib-icon" style="color:#c4b5fd"><i class="fa-solid fa-ghost"></i></div>
+          <div>
+            <div class="ib-title">Gravação do fantasma</div>
+            <div class="ib-desc">Trajetória da sua melhor corrida. Salva apenas no dispositivo.</div>
+          </div>
+        </div>
+        <div class="item-box">
+          <div class="ib-icon" style="color:#86efac"><i class="fa-solid fa-gamepad"></i></div>
+          <div>
+            <div class="ib-title">Perfil do Play Games</div>
+            <div class="ib-desc">Nome de exibição e foto do Google Play Games para o ranking global.</div>
+          </div>
+        </div>
+        <div class="item-box">
+          <div class="ib-icon" style="color:#fdba74"><i class="fa-solid fa-rectangle-ad"></i></div>
+          <div>
+            <div class="ib-title">Dados de anúncios</div>
+            <div class="ib-desc">ID de publicidade do dispositivo, coletado pelo Google AdMob para exibição de anúncios.</div>
+          </div>
+        </div>
+        <div class="item-box">
+          <div class="ib-icon" style="color:#93c5fd"><i class="fa-solid fa-sliders"></i></div>
+          <div>
+            <div class="ib-title">Preferências do jogo</div>
+            <div class="ib-desc">Configurações como ativar/desativar som e fantasma. Salvas localmente.</div>
+          </div>
+        </div>
+        <div class="item-box">
+          <div class="ib-icon" style="color:#fca5a5"><i class="fa-solid fa-chart-line"></i></div>
+          <div>
+            <div class="ib-title">Dados de uso do app</div>
+            <div class="ib-desc">Informações de desempenho e erros, coletadas pelo Google Play para estabilidade.</div>
+          </div>
+        </div>
+      </div>
+
+      <p style="margin-top:20px"><strong>O que NÃO coletamos:</strong></p>
+      <div class="no-data-row">
+        <span class="no-data-pill"><i class="fa-solid fa-xmark"></i> Nome ou e-mail</span>
+        <span class="no-data-pill"><i class="fa-solid fa-xmark"></i> Localização GPS</span>
+        <span class="no-data-pill"><i class="fa-solid fa-xmark"></i> Câmera ou microfone</span>
+        <span class="no-data-pill"><i class="fa-solid fa-xmark"></i> Contatos</span>
+        <span class="no-data-pill"><i class="fa-solid fa-xmark"></i> Dados financeiros</span>
+        <span class="no-data-pill"><i class="fa-solid fa-xmark"></i> Dados biométricos</span>
+        <span class="no-data-pill"><i class="fa-solid fa-xmark"></i> Histórico de navegação</span>
+        <span class="no-data-pill"><i class="fa-solid fa-xmark"></i> Outros apps instalados</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 3. COMO OS DADOS SÃO USADOS ── -->
+  <section>
+    <div class="section-header">
+      <div class="section-icon c-green"><i class="fa-solid fa-gears"></i></div>
+      <h2>3. Finalidade do Uso dos Dados</h2>
+    </div>
+    <div class="section-body">
+      <div class="item-grid">
+        <div class="item-box">
+          <div class="ib-icon" style="color:#86efac"><i class="fa-solid fa-ranking-star"></i></div>
+          <div>
+            <div class="ib-title">Ranking global</div>
+            <div class="ib-desc">Submeter sua pontuação ao leaderboard do Google Play Games.</div>
+          </div>
+        </div>
+        <div class="item-box">
+          <div class="ib-icon" style="color:#86efac"><i class="fa-solid fa-floppy-disk"></i></div>
+          <div>
+            <div class="ib-title">Progresso local</div>
+            <div class="ib-desc">Salvar recorde e fantasma para uso exclusivo no seu dispositivo.</div>
+          </div>
+        </div>
+        <div class="item-box">
+          <div class="ib-icon" style="color:#86efac"><i class="fa-solid fa-circle-dollar-to-slot"></i></div>
+          <div>
+            <div class="ib-title">Exibição de anúncios</div>
+            <div class="ib-desc">Mostrar banners e intersticiais para manter o jogo gratuito.</div>
+          </div>
+        </div>
+        <div class="item-box">
+          <div class="ib-icon" style="color:#86efac"><i class="fa-solid fa-bug-slash"></i></div>
+          <div>
+            <div class="ib-title">Diagnóstico</div>
+            <div class="ib-desc">Identificar e corrigir erros para melhorar a experiência.</div>
+          </div>
+        </div>
+      </div>
+      <div class="alert alert-yellow" style="margin-top:18px">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        <span>Os dados <strong>nunca são vendidos</strong> a terceiros. São usados exclusivamente para as finalidades descritas acima.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 4. SERVIÇOS DE TERCEIROS ── -->
+  <section>
+    <div class="section-header">
+      <div class="section-icon c-yellow"><i class="fa-solid fa-plug"></i></div>
+      <h2>4. Serviços de Terceiros</h2>
+    </div>
+    <div class="section-body">
+      <p style="margin-bottom:16px">O Gap Kart utiliza os seguintes serviços de terceiros. Cada um possui sua própria política de privacidade:</p>
+
+      <div class="tp-card">
+        <div class="tp-logo" style="background:rgba(66,133,244,0.15); color:#4285f4; font-size:1.4rem">
+          <i class="fa-brands fa-google"></i>
+        </div>
+        <div>
+          <div class="tp-name">Google AdMob</div>
+          <div class="tp-type"><i class="fa-solid fa-rectangle-ad" style="font-size:0.7rem"></i> Publicidade</div>
+          <div class="tp-desc">
+            Exibe anúncios em banner e intersticial. Pode coletar o ID de publicidade do dispositivo (GAID),
+            informações do dispositivo e dados de interação com anúncios para personalização e métricas.
+            Você pode redefinir ou desativar o ID de publicidade nas configurações do Android em
+            <strong>Google → Anúncios</strong>.
+          </div>
+          <div class="tp-link">
+            <a href="https://policies.google.com/privacy" target="_blank">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> Política de Privacidade do Google
+            </a>
+            &nbsp;&nbsp;
+            <a href="https://support.google.com/admob/answer/6128543" target="_blank">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> Práticas de dados do AdMob
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="tp-card">
+        <div class="tp-logo" style="background:rgba(52,211,153,0.15); color:#34d399; font-size:1.3rem">
+          <i class="fa-brands fa-google-play"></i>
+        </div>
+        <div>
+          <div class="tp-name">Google Play Games Services</div>
+          <div class="tp-type"><i class="fa-solid fa-trophy" style="font-size:0.7rem"></i> Ranking e Conquistas</div>
+          <div class="tp-desc">
+            Gerencia autenticação, leaderboard global e pontuações. Acessa o nome de exibição e a foto do perfil
+            associados à sua conta Google. As pontuações enviadas são públicas no ranking do jogo.
+            O uso é regido pelos Termos de Serviço do Google Play Games.
+          </div>
+          <div class="tp-link">
+            <a href="https://policies.google.com/privacy" target="_blank">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> Política de Privacidade do Google
+            </a>
+            &nbsp;&nbsp;
+            <a href="https://play.google.com/about/play-terms/" target="_blank">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> Termos do Google Play
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="tp-card">
+        <div class="tp-logo" style="background:rgba(245,197,24,0.15); color:#f5c518; font-size:1.3rem">
+          <i class="fa-brands fa-android"></i>
+        </div>
+        <div>
+          <div class="tp-name">Google Play Store</div>
+          <div class="tp-type"><i class="fa-solid fa-store" style="font-size:0.7rem"></i> Distribuição</div>
+          <div class="tp-desc">
+            Plataforma de distribuição do aplicativo. Pode coletar dados de instalação, atualizações e
+            informações do dispositivo de acordo com as políticas do Google Play.
+          </div>
+          <div class="tp-link">
+            <a href="https://play.google.com/about/play-terms/" target="_blank">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> Termos do Google Play
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 5. ARMAZENAMENTO ── -->
+  <section>
+    <div class="section-header">
+      <div class="section-icon c-purple"><i class="fa-solid fa-hard-drive"></i></div>
+      <h2>5. Armazenamento e Segurança dos Dados</h2>
+    </div>
+    <div class="section-body">
+      <div class="item-grid">
+        <div class="item-box">
+          <div class="ib-icon" style="color:#c4b5fd"><i class="fa-solid fa-mobile-screen"></i></div>
+          <div>
+            <div class="ib-title">Dados locais</div>
+            <div class="ib-desc">Recorde e configurações ficam armazenados apenas no seu dispositivo via SharedPreferences do Android.</div>
+          </div>
+        </div>
+        <div class="item-box">
+          <div class="ib-icon" style="color:#c4b5fd"><i class="fa-solid fa-cloud"></i></div>
+          <div>
+            <div class="ib-title">Dados na nuvem</div>
+            <div class="ib-desc">Pontuações enviadas ao Google Play Games são armazenadas nos servidores do Google, protegidos pela infraestrutura deles.</div>
+          </div>
+        </div>
+        <div class="item-box">
+          <div class="ib-icon" style="color:#c4b5fd"><i class="fa-solid fa-lock"></i></div>
+          <div>
+            <div class="ib-title">Sem servidor próprio</div>
+            <div class="ib-desc">O desenvolvedor não opera servidores. Nenhum dado é enviado a servidores próprios.</div>
+          </div>
+        </div>
+        <div class="item-box">
+          <div class="ib-icon" style="color:#c4b5fd"><i class="fa-solid fa-trash-can"></i></div>
+          <div>
+            <div class="ib-title">Exclusão de dados</div>
+            <div class="ib-desc">Desinstalar o app remove todos os dados locais. Dados do Play Games podem ser gerenciados nas configurações da conta Google.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="alert alert-green" style="margin-top:18px">
+        <i class="fa-solid fa-shield-halved"></i>
+        <span>Não armazenamos senhas, dados bancários ou qualquer informação sensível. O jogo funciona sem criar conta própria.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 6. CRIANÇAS ── -->
+  <section>
+    <div class="section-header">
+      <div class="section-icon c-orange"><i class="fa-solid fa-child"></i></div>
+      <h2>6. Privacidade de Crianças (COPPA / ECA)</h2>
+    </div>
+    <div class="section-body">
+      <p>
+        O Gap Kart é classificado para todas as idades na Google Play Store. O aplicativo
+        <strong>não coleta intencionalmente informações pessoais identificáveis de crianças menores de 13 anos</strong>
+        sem o consentimento verificável dos pais ou responsáveis.
+      </p>
+      <p style="margin-top:12px">
+        Os anúncios exibidos pelo Google AdMob estão configurados para respeitar as políticas de
+        conteúdo adequado para famílias (Google Play Families Policy).
+      </p>
+      <p style="margin-top:12px">
+        Se você é pai ou responsável e acredita que seu filho forneceu dados pessoais sem consentimento,
+        entre em contato conosco pelo e-mail abaixo para que possamos tomar as medidas necessárias.
+      </p>
+      <div class="alert alert-yellow" style="margin-top:12px">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        <span>O Google Play Games requer uma conta Google. Caso sua criança utilize o recurso de ranking, certifique-se de que a conta está adequadamente configurada com as proteções parentais do Google Family Link.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 7. DIREITOS DO USUÁRIO ── -->
+  <section>
+    <div class="section-header">
+      <div class="section-icon c-cyan"><i class="fa-solid fa-scale-balanced"></i></div>
+      <h2>7. Seus Direitos (LGPD / GDPR)</h2>
+    </div>
+    <div class="section-body">
+      <p>De acordo com a Lei Geral de Proteção de Dados (LGPD — Lei 13.709/2018) e o Regulamento Geral de Proteção de Dados (GDPR), você tem os seguintes direitos:</p>
+      <div class="rights-grid">
+        <div class="right-box">
+          <div class="r-icon" style="color:#00e5ff"><i class="fa-solid fa-magnifying-glass"></i></div>
+          <div class="r-title">Acesso</div>
+          <div class="r-desc">Solicitar informações sobre os dados que temos sobre você</div>
+        </div>
+        <div class="right-box">
+          <div class="r-icon" style="color:#00e5ff"><i class="fa-solid fa-pen-to-square"></i></div>
+          <div class="r-title">Correção</div>
+          <div class="r-desc">Corrigir dados incorretos ou desatualizados</div>
+        </div>
+        <div class="right-box">
+          <div class="r-icon" style="color:#00e5ff"><i class="fa-solid fa-trash"></i></div>
+          <div class="r-title">Exclusão</div>
+          <div class="r-desc">Solicitar a exclusão dos seus dados pessoais</div>
+        </div>
+        <div class="right-box">
+          <div class="r-icon" style="color:#00e5ff"><i class="fa-solid fa-hand"></i></div>
+          <div class="r-title">Oposição</div>
+          <div class="r-desc">Opor-se ao processamento dos seus dados</div>
+        </div>
+        <div class="right-box">
+          <div class="r-icon" style="color:#00e5ff"><i class="fa-solid fa-box-archive"></i></div>
+          <div class="r-title">Portabilidade</div>
+          <div class="r-desc">Receber seus dados em formato estruturado</div>
+        </div>
+        <div class="right-box">
+          <div class="r-icon" style="color:#00e5ff"><i class="fa-solid fa-user-slash"></i></div>
+          <div class="r-title">Retirada de consentimento</div>
+          <div class="r-desc">Revogar permissões concedidas anteriormente</div>
+        </div>
+      </div>
+      <p style="margin-top:16px">
+        Para exercer qualquer desses direitos, entre em contato via e-mail. Para dados gerenciados pelo Google
+        (Play Games, AdMob), utilize as configurações da sua conta Google ou o painel de controle de privacidade
+        em <a href="https://myaccount.google.com/privacy" target="_blank" style="color:var(--accent)">myaccount.google.com</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── 8. PERMISSÕES ── -->
+  <section>
+    <div class="section-header">
+      <div class="section-icon c-red"><i class="fa-solid fa-key"></i></div>
+      <h2>8. Permissões do Aplicativo</h2>
+    </div>
+    <div class="section-body">
+      <div class="item-grid">
+        <div class="item-box">
+          <div class="ib-icon" style="color:#86efac"><i class="fa-solid fa-wifi"></i></div>
+          <div>
+            <div class="ib-title">INTERNET</div>
+            <div class="ib-desc">Necessária para carregar anúncios e enviar pontuação ao ranking.</div>
+          </div>
+        </div>
+        <div class="item-box">
+          <div class="ib-icon" style="color:#86efac"><i class="fa-solid fa-signal"></i></div>
+          <div>
+            <div class="ib-title">ACCESS_NETWORK_STATE</div>
+            <div class="ib-desc">Verificar conectividade antes de carregar anúncios e ranking.</div>
+          </div>
+        </div>
+        <div class="item-box">
+          <div class="ib-icon" style="color:#86efac"><i class="fa-solid fa-id-badge"></i></div>
+          <div>
+            <div class="ib-title">AD_ID</div>
+            <div class="ib-desc">ID de publicidade para exibição de anúncios personalizados via AdMob.</div>
+          </div>
+        </div>
+      </div>
+      <div class="alert alert-green" style="margin-top:16px">
+        <i class="fa-solid fa-check-circle"></i>
+        <span>O aplicativo <strong>não solicita</strong> permissões de câmera, microfone, localização, contatos ou qualquer outro dado sensível.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 9. RETENÇÃO ── -->
+  <section>
+    <div class="section-header">
+      <div class="section-icon c-blue"><i class="fa-solid fa-clock-rotate-left"></i></div>
+      <h2>9. Retenção de Dados</h2>
+    </div>
+    <div class="section-body">
+      <ul>
+        <li><strong>Dados locais</strong> (recorde, fantasma, configurações): permanecem no dispositivo até você desinstalar o aplicativo ou limpar os dados do app nas configurações do Android.</li>
+        <li><strong>Pontuações no ranking</strong>: armazenadas nos servidores do Google Play Games enquanto você tiver uma conta Google ativa. Podem ser excluídas pela conta Google.</li>
+        <li><strong>Dados de anúncios</strong>: gerenciados pelo Google AdMob conforme a política de retenção deles.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ── 10. ALTERAÇÕES ── -->
+  <section>
+    <div class="section-header">
+      <div class="section-icon c-yellow"><i class="fa-solid fa-file-pen"></i></div>
+      <h2>10. Alterações nesta Política</h2>
+    </div>
+    <div class="section-body">
+      <p>
+        Podemos atualizar esta Política de Privacidade periodicamente para refletir mudanças no aplicativo
+        ou por exigências legais. Quando isso ocorrer, a data de <strong>"Última atualização"</strong>
+        no topo desta página será revisada.
+      </p>
+      <p style="margin-top:10px">
+        Recomendamos verificar esta página periodicamente. O uso contínuo do aplicativo após alterações
+        implica aceitação da política atualizada.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── 11. CONTATO ── -->
+  <section>
+    <div class="section-header">
+      <div class="section-icon c-cyan"><i class="fa-solid fa-envelope"></i></div>
+      <h2>11. Contato</h2>
+    </div>
+    <div class="section-body">
+      <p>Dúvidas, solicitações de exclusão de dados ou qualquer questão relacionada à privacidade:</p>
+      <div class="contact-box">
+        <div class="c-icon"><i class="fa-solid fa-envelope-open-text"></i></div>
+        <p><strong style="color:var(--text)">Higor Fernandes</strong></p>
+        <p>Desenvolvedor — Gap Kart</p>
+        <p style="margin-top:10px">
+          <a href="mailto:higor.oliveira.fernandes@gmail.com">
+            <i class="fa-solid fa-envelope"></i> higor.oliveira.fernandes@gmail.com
+          </a>
+        </p>
+        <p style="margin-top:8px; font-size:0.82rem; color:var(--muted)">
+          Respondemos em até 15 dias úteis.
+        </p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>© 2026 <strong>Gap Kart</strong> · Higor Fernandes · Todos os direitos reservados</p>
+  <p style="margin-top:6px">Esta política está em conformidade com a <strong>LGPD</strong> (Lei 13.709/2018) e o <strong>GDPR</strong> (Regulamento UE 2016/679)</p>
+</footer>
+
+</body>
+</html>
